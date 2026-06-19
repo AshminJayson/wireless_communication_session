@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>5G & the Road to 6G — Session Prep Notes</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #16222b; font-size: 11pt; line-height: 1.5; margin: 0;
+  }
+  h1, h2, h3 { font-family: "Helvetica Neue", Arial, sans-serif; }
+
+  /* ---- cover ---- */
+  .cover { text-align: center; padding: 40mm 0 0; page-break-after: always; }
+  .cover .kicker { font-size: 10pt; letter-spacing: 3px; text-transform: uppercase; color: #c77f1a; font-weight: 700; }
+  .cover h1 { font-size: 30pt; margin: 14px 0 6px; letter-spacing: -0.5px; }
+  .cover h1 .road { color: #c77f1a; }
+  .cover .sub { color: #5f7078; font-size: 12pt; margin: 6px 0 28px; }
+  .cover .by { font-size: 10pt; letter-spacing: 1px; text-transform: uppercase; color: #16222b; }
+  .cover .by .role { color: #8a999f; }
+  .cover .meta { margin-top: 36px; font-size: 10pt; color: #5f7078; }
+  .cover hr { border: none; border-top: 2px solid #1aa687; width: 60px; margin: 24px auto; }
+
+  /* ---- how to use ---- */
+  .howto { page-break-after: always; }
+  .howto h2 { font-size: 16pt; color: #16222b; border-bottom: 2px solid #1aa687; padding-bottom: 6px; }
+  .howto ul { padding-left: 18px; }
+  .howto li { margin: 6px 0; }
+
+  /* ---- slide block ---- */
+  .slide { page-break-inside: avoid; margin: 0 0 16px; padding: 0 0 14px; border-bottom: 1px solid #e3e9ec; }
+  .slide .head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .slide .num {
+    font-family: "SFMono-Regular", Menlo, monospace; font-size: 9pt; font-weight: 700;
+    color: #fff; background: #16222b; border-radius: 5px; padding: 3px 8px; white-space: nowrap;
+  }
+  .slide.part .num { background: #c77f1a; }
+  .slide .part-tag { font-family: monospace; font-size: 8pt; letter-spacing: 2px; text-transform: uppercase; color: #1aa687; font-weight: 700; }
+  .slide h3 { font-size: 13.5pt; margin: 2px 0 4px; color: #16222b; }
+  .slide.part h3 { color: #c77f1a; }
+
+  .lbl { font-family: monospace; font-size: 8pt; letter-spacing: 1.5px; text-transform: uppercase; color: #8a999f; font-weight: 700; margin: 10px 0 3px; }
+  .screen ul { margin: 2px 0 0; padding-left: 18px; }
+  .screen li { margin: 2px 0; }
+  .screen li b { color: #16222b; }
+  .talk { margin: 2px 0 0; color: #2c3a42; }
+
+  .stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .stat { background: #f2f7f6; border: 1px solid #d7e4e1; border-radius: 7px; padding: 6px 10px; font-size: 9.5pt; }
+  .stat b { font-family: monospace; color: #117a63; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 4px; }
+  th, td { border: 1px solid #d7e4e1; padding: 5px 8px; text-align: left; }
+  th { background: #f2f7f6; font-size: 8.5pt; text-transform: uppercase; letter-spacing: 0.5px; color: #5f7078; }
+
+  .tip { background: #fff7eb; border-left: 3px solid #c77f1a; padding: 6px 10px; margin-top: 8px; font-size: 9.5pt; color: #6b4a14; border-radius: 0 5px 5px 0; }
+  .tip b { color: #8a5a10; }
+</style>
+</head>
+<body>
+
+<!-- ================= COVER ================= -->
+<div class="cover">
+  <div class="kicker">Wireless Communication · Session Prep</div>
+  <h1>5G &amp; the <span class="road">Road to 6G</span></h1>
+  <div class="sub">Presenter preparation guide — slide-by-slide content &amp; talk track</div>
+  <hr>
+  <div class="by">Irene Binnet &nbsp;·&nbsp; <span class="role">Hardware Design Engineer, Cavli Wireless</span></div>
+  <div class="meta">26 slides · 4 parts + open floor · Companion to <span style="font-family:monospace">5g-to-6g-session.html</span></div>
+</div>
+
+<!-- ================= HOW TO USE ================= -->
+<div class="howto">
+  <h2>How to use this guide</h2>
+  <ul>
+    <li><b>One block per slide.</b> Each block shows the slide number/title, <b>“On screen”</b> (what the audience sees) and <b>“Talk track”</b> (what you say — expand naturally, don’t read it).</li>
+    <li><b>The anchor slide is #5 “One signal, five generations.”</b> Everything else hangs off the idea that each generation solved the previous one’s hard limit. If you’re short on time, protect that slide.</li>
+    <li><b>Lean into your edge.</b> You’re a hardware engineer — slides on Massive MIMO/beamforming (#11), the three domains (#13), and roles (#23) are where you can go off-script with real experience from Cavli.</li>
+    <li><b>Keep the big numbers honest.</b> 20 Gbps, 1 ms, ~1 Tbps are <i>ITU/research targets</i>, not what a phone shows. Saying so builds credibility.</li>
+    <li><b>Timing:</b> ~25–30 min of content leaves room for Q&amp;A. Part openers (the “Part One/Two…” slides) are 10-second breathers — use them to reset pace.</li>
+    <li><b>Audience hooks:</b> show of hands on slide #7 (3G download wait); invite their field on slides #14, #19.</li>
+  </ul>
+</div>
+
+<!-- ================= SLIDES ================= -->
+
+<!-- 1 -->
+<div class="slide">
+  <div class="head"><span class="num">01</span><span class="part-tag">Hero · Title</span></div>
+  <h3>5G &amp; the Road to 6G</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Title with animated signal waveform.</li>
+    <li>Tagline: “From today’s intelligent networks to the intelligence-native networks ahead.”</li>
+    <li>Your name &amp; role.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Welcome. Introduce yourself — Irene Binnet, Hardware Design Engineer at Cavli Wireless. Set the agenda in one breath: how mobile networks evolved into 5G, where 6G is heading, and the careers behind all of it. Invite questions throughout, with an open floor at the end.</p>
+</div>
+
+<!-- 2 -->
+<div class="slide">
+  <div class="head"><span class="num">02</span><span class="part-tag">Overview</span></div>
+  <h3>What we’ll cover</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>Evolution of mobile networks</b> — analog voice to an intelligent ecosystem, and what drove each leap.</li>
+    <li><b>Understanding 5G</b> — core tech, service classes, applications, deployment realities.</li>
+    <li><b>The road to 6G</b> — why it’s coming, enabling tech, experiences unlocked.</li>
+    <li><b>Careers in telecom &amp; networking</b> — roles, emerging opportunities, skills.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Four areas, then open Q&amp;A: from history, to how 5G works, to the 6G outlook, to where the careers are. Keep it to ~20 seconds — it’s a signpost, not a topic.</p>
+</div>
+
+<!-- 3 -->
+<div class="slide part">
+  <div class="head"><span class="num">03</span><span class="part-tag">Part One</span></div>
+  <h3>Evolution of Mobile Networks</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Section opener. Thesis: “Every generation existed to solve the hard limit of the one before it.”</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Plant the thread that carries the whole talk: each generation solved a specific limitation of the last. Say it explicitly here so you can call back to it on every later slide.</p>
+</div>
+
+<!-- 4 -->
+<div class="slide">
+  <div class="head"><span class="num">04</span><span class="part-tag">Evolution · Why it matters</span></div>
+  <h3>Connectivity is infrastructure now</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>From signals and letters to <b>instant global communication</b> in a generation.</li>
+    <li>Mobile put the internet in everyone’s pocket and <b>reshaped how society runs</b>.</li>
+    <li>An outage halts business and services — it’s <b>critical infrastructure</b>, not a convenience.</li>
+    <li>Where it lands: business, healthcare, education, entertainment.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Frame connectivity as infrastructure, not a gadget. Tie the sector examples to whatever this room works with — pick the one or two closest to the audience and make it concrete.</p>
+</div>
+
+<!-- 5 -->
+<div class="slide">
+  <div class="head"><span class="num">05</span><span class="part-tag">Evolution · The signal · ANCHOR</span></div>
+  <h3>One signal, five generations</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>1G</b> (1980s) — Analog voice. First mobile calls, no data.</li>
+    <li><b>2G</b> (1990s) — Digital + SMS. Texting, clearer calls.</li>
+    <li><b>3G</b> (2000s) — Mobile internet. Web &amp; multimedia.</li>
+    <li><b>4G</b> (2010s) — LTE broadband. HD video streaming.</li>
+    <li><b>5G</b> (2020s) — Connected ecosystem. Low latency, massive scale.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">The deck’s anchor — slow down here. Walk left to right: voice, text, internet, video, machines. Point at the waveforms getting denser across the row — each generation carries more, and a <i>new kind</i> of information, not just more speed. Every later slide refers back to this picture.</p>
+  <div class="tip"><b>If short on time:</b> protect this slide. Cut elsewhere first.</div>
+</div>
+
+<!-- 6 -->
+<div class="slide">
+  <div class="head"><span class="num">06</span><span class="part-tag">Evolution · Drivers</span></div>
+  <h3>Why networks never stand still</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>Growing data consumption</b> — video, cloud, high-res content raise the bandwidth floor.</li>
+    <li><b>Explosion of devices</b> — phones, wearables, sensors, machines (IoT at scale).</li>
+    <li><b>Real-time expectations</b> — gaming, calls, AR/VR, control systems.</li>
+    <li><b>Automation &amp; M2M</b> — machines talking to machines.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">These four forces compound, so demand never settles — that’s <i>why</i> there’s always a next generation. Drop the stat: connected devices already outnumber people.</p>
+</div>
+
+<!-- 7 -->
+<div class="slide">
+  <div class="head"><span class="num">07</span><span class="part-tag">Evolution · Perspective</span></div>
+  <h3>What the leaps actually feel like</h3>
+  <div class="lbl">On screen — download a 2-hour movie (~5 GB)</div>
+  <table>
+    <tr><th>Network</th><th>Time</th><th>Throughput</th></tr>
+    <tr><td>3G</td><td>2–3 hours</td><td>~2–5 Mbps</td></tr>
+    <tr><td>4G</td><td>15–30 minutes</td><td>~20–50 Mbps</td></tr>
+    <tr><td>5G</td><td>Seconds to a minute</td><td>hundreds of Mbps to Gbps</td></tr>
+  </table>
+  <div class="lbl">Talk track</div>
+  <p class="talk">A benchmark people <i>feel</i>. Quick show of hands — who remembers waiting on a 3G download? Bridge out of it: expectations now assume instant, and that pressure is exactly what drives the next generation.</p>
+</div>
+
+<!-- 8 -->
+<div class="slide part">
+  <div class="head"><span class="num">08</span><span class="part-tag">Part Two</span></div>
+  <h3>Understanding 5G</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Section opener. Thesis: “Not a faster 4G — a platform built for people, machines, and mission-critical control at once.”</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">The core of the talk — signal you’re going under the hood now: what makes 5G different, then where it’s used.</p>
+</div>
+
+<!-- 9 -->
+<div class="slide">
+  <div class="head"><span class="num">09</span><span class="part-tag">5G · Definition</span></div>
+  <h3>What is 5G?</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Fifth generation of mobile networks — an <b>intelligent, connected ecosystem</b> for people, machines, and industries.</li>
+    <li>Objectives: extreme speed &amp; capacity · ultra-low latency · massive device connectivity · mission-critical reliability.</li>
+  </ul></div>
+  <div class="stats">
+    <span class="stat"><b>20 Gbps</b> peak data-rate target (ITU IMT-2020)</span>
+    <span class="stat"><b>~1 ms</b> air-interface latency target</span>
+    <span class="stat"><b>10⁶ / km²</b> connected-device density</span>
+  </div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Stress that 5G is a <i>platform</i>, not a faster phone. The three numbers are ITU IMT-2020 targets — ideal, not what a handset shows today. Set that expectation honestly; it makes you more credible, not less.</p>
+</div>
+
+<!-- 10 -->
+<div class="slide">
+  <div class="head"><span class="num">10</span><span class="part-tag">5G · Comparison</span></div>
+  <h3>4G versus 5G</h3>
+  <table>
+    <tr><th>Capability</th><th>4G LTE</th><th>5G</th></tr>
+    <tr><td>Peak data rate</td><td>~1 Gbps</td><td>up to ~20 Gbps</td></tr>
+    <tr><td>Typical latency</td><td>~30–50 ms</td><td>~1–10 ms</td></tr>
+    <tr><td>Device density</td><td>~10⁵ / km²</td><td>~10⁶ / km²</td></tr>
+    <tr><td>Mobility</td><td>up to ~350 km/h</td><td>up to ~500 km/h</td></tr>
+    <tr><td>Primary focus</td><td>Mobile broadband</td><td>Broadband + IoT + critical control</td></tr>
+  </table>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Walk the rows. The real game-changers for industry are <b>latency and density</b>, not raw peak speed — that’s what enables control loops, automation, and dense IoT. Note these are targets/typical values; real figures vary by deployment and spectrum.</p>
+</div>
+
+<!-- 11 -->
+<div class="slide">
+  <div class="head"><span class="num">11</span><span class="part-tag">5G · Air interface</span></div>
+  <h3>Massive MIMO &amp; beamforming</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>Massive MIMO</b> (Multiple-Input, Multiple-Output) — dozens-to-hundreds of antennas per cell, serving many users at once, far more capacity &amp; coverage.</li>
+    <li><b>Beamforming</b> — focused, steerable signals aimed at each user; less waste, better signal strength &amp; efficiency.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">MIMO = more antennas, more parallel streams. Beamforming = aiming instead of broadcasting — <b>floodlight vs. steerable spotlight</b>. This is your world as a hardware/RF engineer — go off-script here with a real example.</p>
+  <div class="tip"><b>Your edge:</b> spend extra time. This is the most hardware-native slide in the deck.</div>
+</div>
+
+<!-- 12 -->
+<div class="slide">
+  <div class="head"><span class="num">12</span><span class="part-tag">5G · Architecture &amp; standards</span></div>
+  <h3>An architecture defined by 3GPP</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>3GPP (3rd Generation Partnership Project) — the global body that standardizes mobile networks.</li>
+    <li>Chain: <b>UE → NG-RAN → 5G Core → Data Network</b>, with reference points Uu (air), N2/N3, N6.</li>
+    <li>Release strip: Rel-15 (first 5G, 2018) · NR (new radio) · 5GC · NSA → SA.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">5G isn’t one vendor’s design — it’s a shared specification, published in numbered Releases (Rel-15 first full 5G in 2018; Rel-16/17/18 add “5G-Advanced”). The arrow labels (Uu, N2/N3, N6) are the actual 3GPP reference points. NSA reused the 4G core first; SA is the full 5G core. Walk it left to right.</p>
+</div>
+
+<!-- 13 -->
+<div class="slide">
+  <div class="head"><span class="num">13</span><span class="part-tag">5G · The three domains</span></div>
+  <h3>UE, RAN &amp; 5G Core</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>UE (User Equipment)</b> — device + 5G modem + (U)SIM; phones, vehicles, cellular IoT modules; speaks NR over the air.</li>
+    <li><b>NG-RAN</b> — the radio layer; gNB base stations with Massive MIMO/beamforming; split into CU / DU / RU.</li>
+    <li><b>5G Core (5GC)</b> — cloud-native, service-based; functions AMF / SMF / UPF; control-plane / user-plane split.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">UE is your world — the device, modem, and SIM; at Cavli you build cellular IoT modules, which <i>are</i> UE. RAN is the radio: gNB, now split into CU/DU/RU for flexible deployment. The Core is cloud-native and service-based — AMF (access &amp; mobility), SMF (sessions), UPF (moves user traffic). The control/user-plane split is what makes network slicing and edge breakout possible.</p>
+</div>
+
+<!-- 14 -->
+<div class="slide">
+  <div class="head"><span class="num">14</span><span class="part-tag">5G · In the field</span></div>
+  <h3>Where 5G shows up</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Smart factories · autonomous vehicles · remote surgery · smart cities · AR/VR · drones, logistics, agriculture.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Don’t read every tile — pick two or three closest to the audience and go deep. You can speak to the device/module side of connecting any of these. Good moment to ask what the room would use it for.</p>
+</div>
+
+<!-- 15 -->
+<div class="slide">
+  <div class="head"><span class="num">15</span><span class="part-tag">5G · The hard parts</span></div>
+  <h3>What still has to be solved</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Challenges: <b>infrastructure cost</b> · <b>spectrum management</b> · <b>security</b> (larger attack surface) · <b>rural coverage</b>.</li>
+    <li>Already in production: <b>Private 5G</b> in manufacturing · <b>5G healthcare</b> (diagnostics, remote monitoring, telemedicine).</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Be honest about what’s hard — cost, spectrum, security, rural reach. Then balance it: Private 5G is a real, growing commercial segment and a concrete example of where investment is flowing.</p>
+</div>
+
+<!-- 16 -->
+<div class="slide part">
+  <div class="head"><span class="num">16</span><span class="part-tag">Part Three</span></div>
+  <h3>The Road to 6G</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Section opener. Thesis: “Still research today — but the direction is set: faster, near-instant, and intelligence-native.”</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Shift to looking ahead. Flag clearly that 6G is research today — but the direction is clear, and it’s where a lot of current work points.</p>
+</div>
+
+<!-- 17 -->
+<div class="slide">
+  <div class="head"><span class="num">17</span><span class="part-tag">6G · The next leap</span></div>
+  <h3>Why 6G, and what to expect</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Why: today’s networks cap out for the most demanding future apps; relentless data growth; immersive, AI-driven experiences 5G can’t fully serve.</li>
+    <li>Expected: <b>~1 Tbps</b> (research target) · <b>near-zero / sub-ms latency</b> · <b>AI-native</b> · enhanced end-to-end reliability.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">The headline: 6G isn’t just faster — it’s <b>AI-native</b> with near-zero latency. Frame ~1 Tbps as an aspirational research target, not a committed spec, to keep your numbers credible.</p>
+</div>
+
+<!-- 18 -->
+<div class="slide">
+  <div class="head"><span class="num">18</span><span class="part-tag">6G · Enabling technologies</span></div>
+  <h3>What makes 6G possible</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>AI in the network</b> — self-optimizing, predictive maintenance, autonomous management.</li>
+    <li><b>Terahertz (THz) communication</b> — very-high-frequency spectrum for ultra-high data rates.</li>
+    <li><b>Space–air–ground networks</b> — satellites + drones + terrestrial, integrated for global reach.</li>
+    <li><b>Digital twins</b> — live virtual replicas of physical systems.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Four enablers. Terahertz and space–air–ground are the most physically novel — and the hardest hardware problems (your wheelhouse). Digital twins are a bridge to industry the audience may already know.</p>
+</div>
+
+<!-- 19 -->
+<div class="slide">
+  <div class="head"><span class="num">19</span><span class="part-tag">6G · On the horizon</span></div>
+  <h3>The experiences it unlocks</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Holographic comms · extended reality · brain–computer interfaces · advanced robotics · autonomous transport · the unimagined.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Directional, not promises — keep the tone exploratory. Good moment to invite the room: which of these would matter in <i>their</i> field?</p>
+</div>
+
+<!-- 20 -->
+<div class="slide">
+  <div class="head"><span class="num">20</span><span class="part-tag">6G · Where we are</span></div>
+  <h3>Research &amp; standardization</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Active global research across academia, industry, and standards bodies (ITU, 3GPP).</li>
+    <li>6G is being <b>defined now</b> — spectrum, requirements, use cases.</li>
+    <li>Today’s engineers are the ones who will build it.</li>
+  </ul></div>
+  <div class="stats">
+    <span class="stat"><b>~2030</b> expected first commercialization</span>
+    <span class="stat"><b>NOW</b> research &amp; standardization underway</span>
+  </div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">We’re in the standardization phase; ITU/3GPP timelines point to roughly 2030. Land the opportunity: anyone entering the field now is early enough to shape it.</p>
+</div>
+
+<!-- 21 -->
+<div class="slide part">
+  <div class="head"><span class="num">21</span><span class="part-tag">Part Four</span></div>
+  <h3>Careers in Telecom &amp; Networking</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Section opener. Thesis: “Everything we just covered is built by people — here’s where they sit, and how to get there.”</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">The practical part — where the roles are and how to move into them. Speak from your own experience here.</p>
+</div>
+
+<!-- 22 -->
+<div class="slide">
+  <div class="head"><span class="num">22</span><span class="part-tag">Careers · The opportunity</span></div>
+  <h3>Why this field</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>Foundation of everything digital</b> — every app, cloud service, and connected device (including AI) rides on these networks.</li>
+    <li><b>Continuous reinvention</b> — 5G, 6G, AI, satellites; renews every few years.</li>
+    <li><b>Durable global demand</b> — skilled engineers needed worldwide, across every industry.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Position telecom/networking as foundational and durable. Make the point that every digital trend — AI and cloud included — rides on this infrastructure, so the demand isn’t a fad.</p>
+</div>
+
+<!-- 23 -->
+<div class="slide">
+  <div class="head"><span class="num">23</span><span class="part-tag">Careers · Telecommunications</span></div>
+  <h3>Telecommunications roles</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>RF Engineer · Wireless Comm. Engineer · Core Network Engineer · GNSS &amp; Location · Satellite Comm. Engineer · <b>Hardware Design</b> (your role at Cavli).</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Concrete roles. You sit on the hardware/RF side — offer to share what the day-to-day actually looks like at a cellular module company like Cavli Wireless. This personal angle is what they’ll remember.</p>
+</div>
+
+<!-- 24 -->
+<div class="slide">
+  <div class="head"><span class="num">24</span><span class="part-tag">Careers · Networking &amp; emerging</span></div>
+  <h3>Networking &amp; emerging roles</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>Networking:</b> Network Engineer · Network Security · Cloud Networking · Data Center Engineer.</li>
+    <li><b>Emerging:</b> 5G/6G Research · AI for Networks · Private Network · Edge Computing · Network Automation · Cybersecurity Analyst.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Classic networking roles plus the newer titles from 5G/6G, automation, and AI. Call out that edge computing and cybersecurity are hiring heavily right now.</p>
+</div>
+
+<!-- 25 -->
+<div class="slide">
+  <div class="head"><span class="num">25</span><span class="part-tag">Careers · The toolkit</span></div>
+  <h3>Skills that get you in</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li><b>Technical:</b> networking fundamentals &amp; TCP/IP · Linux · wireless communication · Python scripting · cloud.</li>
+    <li><b>Human:</b> problem-solving · communication · collaboration · continuous learning.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">The actionable takeaway — make it land. Fundamentals + Linux + Python are the common base. Push <b>hands-on projects and labs over certificates alone</b>.</p>
+</div>
+
+<!-- 26 -->
+<div class="slide">
+  <div class="head"><span class="num">26</span><span class="part-tag">Open floor</span></div>
+  <h3>Let’s talk.</h3>
+  <div class="lbl">On screen</div>
+  <div class="screen"><ul>
+    <li>Closing. “Questions, perspectives, and where the industry goes next.” Your name &amp; role again.</li>
+  </ul></div>
+  <div class="lbl">Talk track</div>
+  <p class="talk">Open the floor. Keep a couple of seed questions ready (e.g. “Where would you want to specialize?”). Thank everyone and share contact details if appropriate.</p>
+  <div class="tip"><b>Seed questions to have ready:</b> What surprised you most about 5G vs 6G? · Which application matters most in your field? · Hardware vs. software side — which pulls you?</div>
+</div>
+
+</body>
+</html>
