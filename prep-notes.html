@@ -72,6 +72,17 @@
 
   .tip { background: #fff7eb; border-left: 3px solid #c77f1a; padding: 6px 10px; margin-top: 8px; font-size: 9.5pt; color: #6b4a14; border-radius: 0 5px 5px 0; }
   .tip b { color: #8a5a10; }
+
+  /* ---- glossary ---- */
+  .glossary { page-break-before: always; }
+  .glossary h2 { font-size: 16pt; color: #16222b; border-bottom: 2px solid #1aa687; padding-bottom: 6px; margin-bottom: 4px; }
+  .glossary .gintro { color: #5f7078; font-size: 9.5pt; margin: 0 0 6px; }
+  .glossary .star { color: #c77f1a; font-size: 8pt; vertical-align: 1px; }
+  .gsec { font-family: monospace; font-size: 8.5pt; letter-spacing: 1.5px; text-transform: uppercase; color: #1aa687; font-weight: 700; margin: 12px 0 4px; border-bottom: 1px solid #e3e9ec; padding-bottom: 2px; }
+  .glossary dl { display: grid; grid-template-columns: 120px 1fr; gap: 2px 12px; margin: 0; font-size: 9.5pt; }
+  .glossary dt { font-weight: 700; color: #0f4c81; }
+  .glossary dd { margin: 0; color: #2c3a42; }
+  .glossary dl { page-break-inside: avoid; }
 </style>
 </head>
 <body>
@@ -501,6 +512,76 @@
   <div class="lbl">Talk track</div>
   <p class="talk">Open the floor. Keep seed questions ready. Thank everyone; share contact details if appropriate.</p>
   <div class="tip"><b>Seed questions:</b> What surprised you most about 5G vs 6G? · Which application matters most in your field? · Hardware vs. software side — which pulls you?</div>
+</div>
+
+<!-- ================= GLOSSARY ================= -->
+<div class="glossary">
+  <h2>Glossary &amp; acronym cheat-sheet</h2>
+  <p class="gintro">One-page revision. The starred (<span class="star">★</span>) terms are the ones to know cold.</p>
+
+  <div class="gsec">Generations &amp; access methods</div>
+  <dl>
+    <dt>FDMA</dt><dd>Frequency-Division Multiple Access — each user gets a separate frequency. (1G)</dd>
+    <dt>TDMA</dt><dd>Time-Division Multiple Access — users share a frequency in time slots. (2G/GSM)</dd>
+    <dt>CDMA</dt><dd>Code-Division Multiple Access — users share spectrum via unique codes. (2G/3G)</dd>
+    <dt>OFDMA <span class="star">★</span></dt><dd>Orthogonal Frequency-Division Multiple Access — data spread over many narrow orthogonal subcarriers; the basis of 4G &amp; 5G.</dd>
+    <dt>GSM / UMTS / LTE</dt><dd>The dominant 2G / 3G / 4G standards, respectively.</dd>
+    <dt>NR <span class="star">★</span></dt><dd>New Radio — the 5G air interface (the radio standard itself).</dd>
+    <dt>VoLTE</dt><dd>Voice over LTE — carrying voice as data packets on 4G (no separate circuit).</dd>
+  </dl>
+
+  <div class="gsec">5G service classes &amp; targets</div>
+  <dl>
+    <dt>eMBB <span class="star">★</span></dt><dd>enhanced Mobile Broadband — high speed/capacity (video, AR/VR).</dd>
+    <dt>URLLC <span class="star">★</span></dt><dd>Ultra-Reliable Low-Latency Comms — ~1 ms, 99.999% (surgery, robots, vehicles).</dd>
+    <dt>mMTC <span class="star">★</span></dt><dd>massive Machine-Type Comms — huge density of low-power IoT devices.</dd>
+    <dt>IMT-2020</dt><dd>The ITU requirement set that defines “5G” (IMT-2030 = 6G).</dd>
+    <dt>ITU / 3GPP <span class="star">★</span></dt><dd>ITU = UN body setting the targets; 3GPP = the partnership writing the actual specs (in Releases).</dd>
+  </dl>
+
+  <div class="gsec">Radio layer</div>
+  <dl>
+    <dt>MIMO <span class="star">★</span></dt><dd>Multiple-Input Multiple-Output — many antennas sending parallel spatial streams.</dd>
+    <dt>Massive MIMO</dt><dd>Base-station array of 32–128+ elements serving many users at once.</dd>
+    <dt>MU-MIMO</dt><dd>Multi-User MIMO — separating simultaneous users by their spatial path.</dd>
+    <dt>Beamforming <span class="star">★</span></dt><dd>Steering signal energy toward a user via per-antenna phase/amplitude weights (a spotlight, not a floodlight).</dd>
+    <dt>Precoding</dt><dd>The weights applied across antennas to shape the beam.</dd>
+    <dt>CSI</dt><dd>Channel State Information — what the radio knows about the channel; needed to beamform.</dd>
+    <dt>TDD / FDD</dt><dd>Time- vs Frequency-Division Duplex — uplink &amp; downlink share time slots vs separate frequencies.</dd>
+    <dt>FR1 / FR2</dt><dd>5G frequency ranges: FR1 = sub-6 GHz, FR2 = mmWave (24 GHz+).</dd>
+    <dt>mmWave</dt><dd>Millimetre-wave spectrum — huge capacity, short range, easily blocked.</dd>
+  </dl>
+
+  <div class="gsec">Architecture: device, radio, core</div>
+  <dl>
+    <dt>UE <span class="star">★</span></dt><dd>User Equipment — the device + modem + (U)SIM (e.g. a Cavli cellular module).</dd>
+    <dt>(NG-)RAN <span class="star">★</span></dt><dd>(Next-Generation) Radio Access Network — the radio side.</dd>
+    <dt>gNB</dt><dd>The 5G base station (the “g” is for NR/5G; 4G’s was eNB).</dd>
+    <dt>CU / DU / RU</dt><dd>Functional split of the gNB: Centralized / Distributed / Radio Unit.</dd>
+    <dt>Fronthaul / Midhaul / Backhaul</dt><dd>Links RU–DU / DU–CU / CU–core.</dd>
+    <dt>O-RAN</dt><dd>Open RAN — open interfaces so the CU/DU/RU can be mixed across vendors.</dd>
+    <dt>5GC <span class="star">★</span></dt><dd>5G Core — cloud-native, service-based core network.</dd>
+    <dt>SBA</dt><dd>Service-Based Architecture — core functions talk via web-style APIs.</dd>
+    <dt>AMF / SMF / UPF <span class="star">★</span></dt><dd>Access &amp; Mobility / Session Management / User Plane Function — the three core functions to remember.</dd>
+    <dt>UDM / AUSF / PCF / NRF</dt><dd>Subscriber data / Authentication / Policy / Function-discovery.</dd>
+    <dt>CUPS</dt><dd>Control/User-Plane Separation — lets the UPF sit at the edge.</dd>
+    <dt>NSA / SA <span class="star">★</span></dt><dd>Non-Standalone (5G radio on 4G core) vs Standalone (5G radio + 5G core).</dd>
+    <dt>Network slicing</dt><dd>Multiple logical networks (each tuned per service class) on one physical network.</dd>
+    <dt>MEC</dt><dd>Multi-access Edge Computing — servers near the user to cut latency.</dd>
+    <dt>Uu / N2 / N3 / N6</dt><dd>Reference points: air link / gNB–AMF / gNB–UPF / UPF–internet.</dd>
+    <dt>SUPI → SUCI</dt><dd>Permanent subscriber identity, sent encrypted as SUCI to stop IMSI-catchers.</dd>
+  </dl>
+
+  <div class="gsec">6G &amp; beyond</div>
+  <dl>
+    <dt>IMT-2030</dt><dd>The ITU framework defining 6G (vision published 2023).</dd>
+    <dt>AI-native</dt><dd>Designing the network/air interface around machine learning from the start.</dd>
+    <dt>THz</dt><dd>Terahertz spectrum (0.1–10 THz) — massive bandwidth, very short range.</dd>
+    <dt>NTN</dt><dd>Non-Terrestrial Networks — satellites (LEO), HAPS, drones integrated with ground.</dd>
+    <dt>RIS</dt><dd>Reconfigurable Intelligent Surface — programmable surface that steers reflected signals.</dd>
+    <dt>ISAC</dt><dd>Integrated Sensing And Communication — the network senses its surroundings while it communicates.</dd>
+    <dt>Digital twin</dt><dd>A live virtual replica of a physical system, fed by real-time data.</dd>
+  </dl>
 </div>
 
 </body>
